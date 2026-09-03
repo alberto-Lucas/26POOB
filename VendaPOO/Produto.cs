@@ -25,10 +25,13 @@
                 return 
                     Descricao + " - " + 
                     Quantidade.ToString() + " x " +
-                    PrecoUnitario.ToString() + " = " +
-                    Total.ToString();
+                    PrecoUnitario.ToString("0.00") + " = " +
+                    (Quantidade * PrecoUnitario).ToString("0.00") +
+                    " Desonto de: R$ " + Desconto.ToString("0.00") +
+                    " Valor Total: R$: " + Total.ToString("0.00");
                 
                 //Ex: Mouse - 2 x 55,50 = 111,00
+                //Desconto R$ 10 Valor Total R$ 101,00
             }
         }
     }

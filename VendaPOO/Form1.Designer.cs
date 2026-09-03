@@ -54,6 +54,7 @@
             this.lblTotalVenda = new System.Windows.Forms.Label();
             this.txtTroco = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnFinalizar = new System.Windows.Forms.Button();
             this.btnAdicionar.SuspendLayout();
             this.group.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -210,6 +211,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Adicionar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnRemover
             // 
@@ -219,11 +221,13 @@
             this.btnRemover.TabIndex = 10;
             this.btnRemover.Text = "Remover";
             this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnFinalizar);
             this.groupBox1.Controls.Add(this.txtTroco);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtValorPago);
@@ -305,6 +309,16 @@
             this.label10.TabIndex = 6;
             this.label10.Text = "Troco:";
             // 
+            // btnFinalizar
+            // 
+            this.btnFinalizar.Location = new System.Drawing.Point(593, 36);
+            this.btnFinalizar.Name = "btnFinalizar";
+            this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
+            this.btnFinalizar.TabIndex = 11;
+            this.btnFinalizar.Text = "Finalizar";
+            this.btnFinalizar.UseVisualStyleBackColor = true;
+            this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,6 +368,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTroco;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnFinalizar;
     }
 }
 
