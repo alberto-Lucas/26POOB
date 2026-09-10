@@ -14,6 +14,25 @@ namespace TesteMVC.Controllers
     {
         //Criar uma fonte de dados para simualr
         //uma tabela de banco de dados
-        PessoaCollection tabela;
+        PessoaCollection tabela = new PessoaCollection();
+
+        //Caso ja estivesse a conexão com o banco de dados
+        //variamos os insert e select diretamente na tabela
+
+        //Seguir com a implementação normal
+        public void Adicionar(Pessoa pessoa)
+        {
+            tabela.Add(pessoa);
+        }
+
+        public void Remover(Pessoa pessoa)
+        {
+            tabela.Remove(pessoa);
+        }
+
+        public PessoaCollection ListarPessoas()
+        {
+            return tabela;
+        }
     }
 }

@@ -55,7 +55,22 @@
         //Esta ira intermediar a manipulação da informação
         //entre a tela e a fonte de dados(Arquivo.txt,
         //Banco de dados, API, etc...)
-
+        //*********Qaurto Passo****************
+        //Podemos finalizar na camada de Apresentação
+        //como desenvolvimento do front-end do projeto
+        //ou seja onde iremos criar todas as tela do sistema
+        //OBS: IMPORTANTE como as tela serão criada em uma camada
+        //é preciso atualizar a chamada da tela inicial do sistema
+        //dentro do arquivo program.cs
+        //OBS2: em alguns projetos, como ja é usado a abreviação
+        //frm para destacar o arquivo é um formulario
+        //não é preciso adicionar a nomenclatura View
+        //no final do nome
+        //porém se não é utilizado o frm é preciso
+        //adicionara a nomenclatura
+        //Ex: frmPessoaCadastro ou PessoaCadastroView
+        //Para criação da tela
+        //basta adicionar um form na pasta Views
 
     }
 }
