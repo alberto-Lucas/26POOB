@@ -149,5 +149,103 @@ namespace ProjetoCRUD.Controllers
             else
                 return null; //retornamos um objeto null
         }
+
+        //Função public de consulta que ira retornar mais de um registro
+        //Ou seja uma coleção de objeto Usuario
+        //Uma consulta que recebe o filtro por parametro
+        //Usaremos o valor padrao vazio "" no parametro
+        //ou seja se eu chamar a função se passar o parametro
+        //automaticamente ele sera vazio
+        //Isso é importar pois filtrar vazio significa trazer 
+        //todos os registro sem aplicar nenhum filtro
+        public UsuarioCollection GetByFilters(string filtro = "")
+        {
+            //Criar o comando SQL para o SELECT
+            string query = "SELECT * FROM usuario ";
+
+            //Vamo identificar se possui filtro
+            //se sim vamos adicioar o filtro a query
+            if (filtro != "")
+                query += "WHERE @filtro ";
+
+            //Por ultimo indenpende do filtro iremos
+            //adicionar um ordenador
+            query += "ORDER BY nome";
+
+            //Instanciar o comando com a query
+            SqlCommand command = new SqlCommand(query);
+
+            //Definimos os parametros
+            command.Parameters.AddWithValue("@filtro", filtro);
+
+            //Vamos executar o comando e recuper a tabela de dados
+            DataTable dataTable = dataBase.GetDataTable(command);
+            
+            //Instanciar a coleção de usuario
+            UsuarioCollection usuarios = new UsuarioCollection();
+
+            //Nesse caso como podemos ter mais de uma linha no retorno
+            //é precisa realizar um loop linha a linha
+            //para isso usaremos o foreach pois é ela ja realiza o loop
+            //de todas as linhas e extrai a linha em uma variavel 
+            //facilitando a codificacao
+            //Ou seja o foreach vai passar por cada linha retonada
+            //e os dados de cada linha ira para a variavel row
+            foreach(DataRow row in dataTable.Rows)
+            {
+                //Realizar o mapeamento da linha para o objeto
+                //semelhante ao realizado no GetById
+
+                //Instanciar o objeto usuario
+                Usuario usuario = new Usuario();
+
+                //Converta os dados da tabela para o objeto
+                //SQL para C#
+                usuario.Id      = (int)row["id"];
+                usuario.Nome    = (string)row["nome"];
+                usuario.Email   = (string)row["email"];
+                usuario.Senha   = (string)row["senha"];
+
+                //Basta adicionar o objeto Usuario dentro da coleção Usuarios
+                //usuarios =  a coleção de usuario (mais de um registro)
+                //usuario = ao objeto (apenas um registro)
+                usuarios.Add(usuario);
+            }
+            //Só retornar a coleção de usuário
+            return usuarios;
+        }
+
+        //Criar funções intermediarias para chamar o o consultar
+        //e definir os filtros, assim a tela chama a função intermediaria
+        //ja com o filtro
+
+        //Função com filtro
+        //Função para retorno todos os dados, ou seja sem filtro
+        public UsuarioCollection GetAll()
+        {
+            //Não passar nada via parametros
+            //pois quero todos os registros
+            //Semelhante ao SELECT * FROM usuario
+            return GetByFilters();
+        }
+
+        //Funação para retornar todos os dados, filtrando pelo nome
+        public UsuarioCollection GetByName(string value)
+        {
+            //Vamos passar o filtro like via parametro
+            //Semelhante ao:
+            //SELECT * FROM usuario WHERE nome LIKE '%valor%'
+            return GetByFilters("nome LIKE '%" + value + "%'");
+        }
+
+        //Funação para retornar todos os dados, filtrando pelo email
+        public UsuarioCollection GetByEmail(string value)
+        {
+            //Vamos passar o filtro like via parametro
+            //Semelhante ao:
+            //SELECT * FROM usuario WHERE email LIKE '%valor%'
+            return GetByFilters("email LIKE '%" + value + "%'");
+        }
+
     }
 }
