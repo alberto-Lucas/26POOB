@@ -158,15 +158,18 @@ namespace ProjetoCRUD.Controllers
         //automaticamente ele sera vazio
         //Isso é importar pois filtrar vazio significa trazer 
         //todos os registro sem aplicar nenhum filtro
-        public UsuarioCollection GetByFilters(string filtro = "")
+        public UsuarioCollection GetByFilters(
+            string campo = "", string filtro = "")
         {
             //Criar o comando SQL para o SELECT
             string query = "SELECT * FROM usuario ";
 
             //Vamo identificar se possui filtro
             //se sim vamos adicioar o filtro a query
+            //Iremos concatenar o campo pois o SQLSERVER
+            //não aceita colocar comando (Ex: LIKE) como parametro da sql
             if (filtro != "")
-                query += "WHERE @filtro ";
+                query += "WHERE " + campo + " LIKE @filtro ";
 
             //Por ultimo indenpende do filtro iremos
             //adicionar um ordenador
@@ -176,7 +179,8 @@ namespace ProjetoCRUD.Controllers
             SqlCommand command = new SqlCommand(query);
 
             //Definimos os parametros
-            command.Parameters.AddWithValue("@filtro", filtro);
+            if (filtro != "")
+                command.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
 
             //Vamos executar o comando e recuper a tabela de dados
             DataTable dataTable = dataBase.GetDataTable(command);
@@ -235,7 +239,7 @@ namespace ProjetoCRUD.Controllers
             //Vamos passar o filtro like via parametro
             //Semelhante ao:
             //SELECT * FROM usuario WHERE nome LIKE '%valor%'
-            return GetByFilters("nome LIKE '%" + value + "%'");
+            return GetByFilters("nome", value);
         }
 
         //Funação para retornar todos os dados, filtrando pelo email
@@ -244,7 +248,7 @@ namespace ProjetoCRUD.Controllers
             //Vamos passar o filtro like via parametro
             //Semelhante ao:
             //SELECT * FROM usuario WHERE email LIKE '%valor%'
-            return GetByFilters("email LIKE '%" + value + "%'");
+            return GetByFilters("email", value);
         }
 
     }
