@@ -26,10 +26,20 @@ namespace ProjetoCRUD.Services
             //A invertida \ é um operador matematico
             //para ser considera um texto usamos duas barras juntas \\
             //Atenção ao colocar o ponto e virgula(;) do final de cada parametro
+
+
+            //Usando autenticação do Windows
             connection.ConnectionString =
                 "Data Source=.\\SQLEXPRESS;" +
                 "Initial Catalog=ProjetoCRUD;" +
                 "Integrated Security=SSPI;"; //Autenticação do Windows
+
+            //Usando Login e Senha
+            //connection.ConnectionString =
+            //    "Server=tcp:HOST,14330;" +
+            //    "Database=ProjetoCRUD;" +
+            //    "User Id=USUARIO;" +
+            //    "Password=SENHA;";
 
             //Abrir a conexão com o banco de dados
             connection.Open();
