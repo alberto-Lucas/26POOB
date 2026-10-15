@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjetoCRUD.Views;
 
 namespace ProjetoCRUD
 {
@@ -16,7 +17,12 @@ namespace ProjetoCRUD
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //A linha que chama a primeira tela a ser exibida
+            //Para abrir a frmPrincipal 
+            //pricisamos importar a camada Views
+            //using NomeProjeto.Views;
+            //Agora só definir a tela desejada
+            Application.Run(new frmPrincipal());
         }
     }
 }

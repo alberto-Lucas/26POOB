@@ -170,7 +170,7 @@ namespace ProjetoCRUD.Controllers
 
             //Por ultimo indenpende do filtro iremos
             //adicionar um ordenador
-            query += "ORDER BY nome";
+            query += " ORDER BY nome";
 
             //Instanciar o comando com a query
             SqlCommand command = new SqlCommand(query);
