@@ -38,7 +38,6 @@
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
             this.lblRegistros = new System.Windows.Forms.Label();
-            this.btnSelecionar = new System.Windows.Forms.Button();
             this.btnVisualizar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
@@ -114,7 +113,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRegistros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegistros.Location = new System.Drawing.Point(12, 61);
+            this.dgvRegistros.MultiSelect = false;
             this.dgvRegistros.Name = "dgvRegistros";
+            this.dgvRegistros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRegistros.Size = new System.Drawing.Size(634, 181);
             this.dgvRegistros.TabIndex = 7;
             // 
@@ -128,16 +129,6 @@
             this.lblRegistros.TabIndex = 8;
             this.lblRegistros.Text = "Registros: ";
             // 
-            // btnSelecionar
-            // 
-            this.btnSelecionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelecionar.Location = new System.Drawing.Point(12, 275);
-            this.btnSelecionar.Name = "btnSelecionar";
-            this.btnSelecionar.Size = new System.Drawing.Size(75, 23);
-            this.btnSelecionar.TabIndex = 9;
-            this.btnSelecionar.Text = "Selecionar";
-            this.btnSelecionar.UseVisualStyleBackColor = true;
-            // 
             // btnVisualizar
             // 
             this.btnVisualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -147,6 +138,7 @@
             this.btnVisualizar.TabIndex = 10;
             this.btnVisualizar.Text = "Visualizar";
             this.btnVisualizar.UseVisualStyleBackColor = true;
+            this.btnVisualizar.Click += new System.EventHandler(this.btnVisualizar_Click);
             // 
             // btnExcluir
             // 
@@ -157,6 +149,7 @@
             this.btnExcluir.TabIndex = 11;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnAdicionar
             // 
@@ -178,6 +171,7 @@
             this.btnAlterar.TabIndex = 12;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // frmUsuarioSelecao
             // 
@@ -188,7 +182,6 @@
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnVisualizar);
-            this.Controls.Add(this.btnSelecionar);
             this.Controls.Add(this.lblRegistros);
             this.Controls.Add(this.dgvRegistros);
             this.Controls.Add(this.btnPesquisar);
@@ -219,7 +212,6 @@
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.DataGridView dgvRegistros;
         private System.Windows.Forms.Label lblRegistros;
-        private System.Windows.Forms.Button btnSelecionar;
         private System.Windows.Forms.Button btnVisualizar;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnAdicionar;

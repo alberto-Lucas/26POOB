@@ -29,7 +29,8 @@ namespace ProjetoCRUD.Views
 
             //Realizar as condicionais
             //Codigo, Nome, Email ou todos se vazio
-            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            //Trim() remove espaços vazios
+            if (!string.IsNullOrEmpty(txtCodigo.Text.Trim()))
             {
                 //No caso do GetById retorna apenas um registro
                 //Então o método retorno um objeto Usuario
@@ -68,11 +69,88 @@ namespace ProjetoCRUD.Views
         private void btnAdicionar_Click(object sender, System.EventArgs e)
         {
             //Abrir a tela de cadastro
-            frmUsuarioCadastro frm = new frmUsuarioCadastro();
+            frmUsuarioCadastro frm = new frmUsuarioCadastro(0, null);
             //Validar o retorno da tela de cadastro
             //Se foi OK ou Cancel
             if (frm.ShowDialog() == DialogResult.OK)
                 Pesquisar(); //Atualizar a grade com o novo cadastro
+        }
+
+        //Função para identificar o registro selecionado 
+        //na grade e recuperar essa informação
+        //transformando-o em objeto novamente
+        //Essa rotina sera nescessaria para as ações
+        //Excluir, Alterar e Visualizar
+        Usuario RecuperarUsuarioSelecionado()
+        {
+            //Validar se possui um registro selecionado
+            if(dgvRegistros.SelectedRows.Count == 0)
+            {
+                //Notificar o usuario do sistema
+                MessageBox.Show("Nenhum registro selecionado.");
+                //Retorno nullo
+                return null;
+            }
+            else
+            {
+                //retorno o registro selecionado
+                //o convertendo de volta para objeto
+                return
+                    dgvRegistros.SelectedRows[0].
+                        DataBoundItem as Usuario;
+            }
+        }
+
+        //Método para realizar a exclusão do registro
+        void Excluir()
+        {
+            //Recuperar o registro selecionado
+            Usuario usuario = RecuperarUsuarioSelecionado();
+
+            //Validar se o usuario selecionado é nullo
+            if(usuario != null)
+            {
+                //Confirmar a exclusão com o usuario
+                if(MessageBox.Show(
+                    "Deseja realmente excluir o registro?",
+                    "Confirmação", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning, 
+                    MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    //Só excluimos com a confirmação
+                    if (controller.Excluir(usuario.Id) > 0)
+                    {
+                        MessageBox.Show("Registro excluito com sucesso.");
+                        Pesquisar();
+                    }
+                    else
+                        MessageBox.Show("Não foi possível excluir o registro.");
+                }
+            }
+        }
+
+        private void btnExcluir_Click(object sender, System.EventArgs e)
+        {
+            Excluir();
+        }
+
+        private void btnAlterar_Click(object sender, System.EventArgs e)
+        {
+            //Abrir a tela de alteração
+            frmUsuarioCadastro frm = 
+                new frmUsuarioCadastro(1, RecuperarUsuarioSelecionado());
+            //Validar o retorno da tela de alteraçao
+            //Se foi OK ou Cancel
+            if (frm.ShowDialog() == DialogResult.OK)
+                Pesquisar(); //Atualizar a grade com o novo cadastro
+        }
+
+        private void btnVisualizar_Click(object sender, System.EventArgs e)
+        {
+            //Abrir a tela de visualização
+            frmUsuarioCadastro frm = 
+                new frmUsuarioCadastro(2, RecuperarUsuarioSelecionado());
+            frm.ShowDialog();
         }
     }
 }
